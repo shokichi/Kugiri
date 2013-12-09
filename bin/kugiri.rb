@@ -2,20 +2,15 @@
 #
 #
 #
-
-require "../lib/base.rb"
+require File.expand_path(File.dirname(__FILE__)+"/../lib/base.rb")
 require "clockwork" 
-include JikanWarin
+include Kugiri
 include Timer
 include Clockwork  
 
-cal = Schedule.new(ARGV[0])
-
 print "=> Ctrl-C to exit\n"
-#Signal.trap(:INT){
-#  print "--- Exiting\n"
-#  exit(0)}
 
+cal = Schedule.new(ARGV[0])
 handler do |type|
   Timer.time_check(cal) if type == "check"
   cal.reload if type == "sync"  

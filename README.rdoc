@@ -1,5 +1,13 @@
 = Kugiri
+
 1日の細かい予定を通知します
 
 == インストール
+必要なもの
+* > Ruby1.9
+* GTK2
+* Clockwork
+ $ gem install clockwork
+ 
 == 使い方
+
