@@ -52,8 +52,8 @@ module Kugiri
         f.each_line{|l|
           line = l.chop.split(" ")
           break if line.size == 0
-          set_date(line[0..-2])
-          set_event(line[-1])
+          set_date(line)
+          set_event(line)
         }
         @@file[:stamp] = f.mtime
       }
@@ -61,7 +61,9 @@ module Kugiri
       puts "Parse file (#{@@file[:name]})"
     end
 
-    def set_date(date)
+    def set_date(line)
+      return if line[0..-2].empty?
+      date = line[0..-2]
       hrs,min = date[-1].split("-")[0].split(":")
       unless date[-2].nil?
         @@month = (date[-2].to_i/100).to_i
@@ -70,8 +72,9 @@ module Kugiri
       @date << Time.mktime(Time.now.year,@@month,@@day,hrs,min)
     end
 
-    def set_event(event)
-      @event << event
+    def set_event(line)
+      return if line[0..-2].empty?
+      @event << line[-1]
     end
 
     def parse_day(day)
