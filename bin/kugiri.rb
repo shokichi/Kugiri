@@ -12,7 +12,7 @@ print "=> Ctrl-C to exit\n"
 
 cal = Schedule.new(ARGV[0])
 handler do |type|
-  Timer.time_check(cal) if type == "check"
+  Timer.time_check(cal)
   cal.reload if type == "sync"  
 end
 
